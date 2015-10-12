@@ -1,6 +1,11 @@
 <?php
 	require_once("edit_functions.php");
 	
+	if(isset($_GET["update"])) {
+	//autoid, auto nr, auto värv
+	updateCarData($_GET["car_id"], $_GET["number_plate"], $_GET["color"]);
+	}
+	
 	//Kas muutuja on aadressireal
 	if (isset($_GET["edit_id"])) {
 		echo $_GET["edit_id"];
@@ -18,7 +23,7 @@
 ?>
 
 <!-- Salvestamiseks kasutan table.php rida 15, updateCar -->
-<form action="table.php" method="get">
+<form action="edit.php" method="get">
 	<input name="car_id" type="hidden" value="<?=$_GET["edit_id"];?>">
 	<input name="number_plate" type="text" value="<?=$car->number_plate;?>"><br>
 	<input name="color" type="text" value="<?=$car->color;?>"><br>

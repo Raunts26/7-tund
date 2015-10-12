@@ -10,10 +10,7 @@
 		
 		
 	}
-	if(isset($_GET["update"])) {
-		//autoid, auto nr, auto värv
-		updateCarData($_GET["car_id"], $_GET["number_plate"], $_GET["color"]);
-	}
+
 	//kõik autod objektide kujul massiivis
 	$car_array = getAllData();
 
