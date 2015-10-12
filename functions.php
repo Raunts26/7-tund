@@ -2,11 +2,21 @@
     //loome AB ühenduse
     require_once("../config_global.php");
     $database = "if15_raunkos";
+	//Vaikevaartus sulgudes, et valtida errorit, mis tekiks real ~31 table.php
 	
-	
-		function getAllData() {
+		function getAllData($keyword="") {
+		
+		if ($keyword == "") {
+			//Ei otsi
+			$search = "%%";
+		}else{
+			
+			$search = "%".$keyword."%";
+		}
+			
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-        $stmt = $mysqli->prepare("SELECT id, user_id, number_plate, color FROM car_plates WHERE deleted IS NULL");
+        $stmt = $mysqli->prepare("SELECT id, user_id, number_plate, color FROM car_plates WHERE deleted IS NULL AND (number_plate LIKE ? OR color LIKE ?)");
+		$stmt->bind_param("ss", $search, $search);
         $stmt->bind_result($id_from_db, $user_id_from_db, $number_plate_from_db, $color_from_db);
         $stmt->execute();
         
@@ -71,7 +81,7 @@
 		$mysqli->close();
 	}
 	
-	
+
 	
 	
 	

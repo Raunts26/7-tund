@@ -14,10 +14,24 @@
 	//kõik autod objektide kujul massiivis
 	$car_array = getAllData();
 
+	
+	$keyword = "";
+	if (isset($_GET["keyword"])) {
+		$keyword = $_GET["keyword"];
+	
+		//otsime
+		$car_array = getAllData($keyword);
+	} else {
+		//Naitame koiki tulemus
+		$car_array = getAllData();
+	}
 ?>
 
 <h1>Tabel</h1>
-
+<form action="table.php" method="get">
+	<input name="keyword" type="search" value="<?=$keyword?>">
+	<input type="submit" value="otsi">
+</form>
 <table border=1>
 <tr>
 	<th>ID</th>
